@@ -265,26 +265,45 @@
             display: block;
         }
 
-        /* ===== ИЗОБРАЖЕНИЕ MERCEDES ===== */
+        /* ===== ИЗОБРАЖЕНИЕ MERCEDES СПРАВА ===== */
         .hero-image {
             flex: 1 1 350px;
             text-align: center;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            gap: 15px;
         }
 
-        .hero-image img {
-            max-width: 100%;
+        /* Логотип Mercedes */
+        .hero-logo {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            opacity: 0.9;
+            filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.15));
+            transition: 0.4s;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            filter: drop-shadow(0 4px 30px rgba(212, 175, 55, 0.3));
+        }
+
+        /* Фото Mercedes */
+        .hero-car {
+            width: 100%;
+            max-width: 500px;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.2);
             transition: 0.4s;
             filter: drop-shadow(0 10px 30px rgba(212, 175, 55, 0.1));
         }
 
-        .hero-image img:hover {
+        .hero-car:hover {
             transform: scale(1.02);
             border-color: #d4af37;
             box-shadow: 0 30px 80px rgba(212, 175, 55, 0.2);
@@ -640,9 +659,15 @@
             .section-header h2 {
                 font-size: 2rem;
             }
-            .hero-image img {
+            .hero-image {
+                order: -1;
+            }
+            .hero-car {
                 max-height: 250px;
                 width: auto;
+            }
+            .hero-logo {
+                max-width: 120px;
             }
             .hero-stats {
                 gap: 20px;
@@ -663,8 +688,11 @@
             .container {
                 padding: 0 15px;
             }
-            .hero-image img {
-                max-height: 200px;
+            .hero-car {
+                max-height: 180px;
+            }
+            .hero-logo {
+                max-width: 80px;
             }
         }
     </style>
@@ -731,9 +759,18 @@
             </div>
         </div>
         <div class="hero-image">
+            <!-- Логотип Mercedes -->
+            <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/1200px-Mercedes-Logo.svg.png"
+                alt="Mercedes-Benz Logo"
+                class="hero-logo"
+                title="Mercedes-Benz"
+            >
+            <!-- Фото Mercedes -->
             <img 
                 src="https://cdn.pixabay.com/photo/2019/04/19/09/11/mercedes-benz-4137485_1280.jpg" 
                 alt="Mercedes-Benz в автосервисе"
+                class="hero-car"
                 title="Mercedes-Benz в автосервисе MercedesService.ru"
                 loading="lazy"
             >
