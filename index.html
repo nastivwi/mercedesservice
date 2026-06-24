@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MercedesService.ru — автосервис Mercedes</title>
+    <!-- Подключение шрифтов и иконок через CDN (работоспособность сохраняется офлайн после кеширования) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0b1a2e;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: #0b1a2e;
+            color: white;
+            padding: 16px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            color: #d4af37;
+            font-size: 2rem;
+        }
+
+        .logo span {
+            color: #d4af37;
+        }
+
+        .nav {
+            display: flex;
+            gap: 28px;
+            font-weight: 500;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .nav a:hover {
+            color: #d4af37;
+        }
+
+        .header-contacts {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.95rem;
+        }
+
+        .header-contacts a {
+            color: #e2e8f0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-contacts i {
+            color: #d4af37;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #0b1a2e;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background: #c09c2f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+        }
+
+        .btn-outline:hover {
+            background: #d4af37;
+            color: #0b1a2e;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: linear-gradient(135deg, #0b1a2e 0%, #1a2f44 100%);
+            color: white;
+            padding: 70px 0 80px;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #d4af37;
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1 1 350px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #d4af37;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            margin-top: 10px;
+        }
+
+        .hero-badges div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-badges i {
+            color: #d4af37;
+            font-size: 1.6rem;
+        }
+
+        .hero-image {
+            flex: 1 1 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image i {
+            font-size: 12rem;
+            color: #d4af37;
+            opacity: 0.25;
+            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+        }
+
+        /* ===== services ===== */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #d4af37;
+            margin-top: 8px;
+            border-radius: 4px;
+        }
+
+        .section-sub {
+            color: #475569;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 28px 22px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            transition: 0.25s ease;
+            border: 1px solid #e9edf2;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+            border-color: #d4af37;
+        }
+
+        .service-card i {
+            font-size: 2.8rem;
+            color: #d4af37;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* ===== about / advantages ===== */
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1 1 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+            color: #1e293b;
+        }
+
+        .about-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px 50px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0b1a2e;
+        }
+
+        .stat-label {
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .about-image {
+            flex: 1 1 280px;
+            background: #e9edf2;
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #0b1a2e;
+            border: 1px solid #d4af37;
+        }
+
+        .about-image i {
+            font-size: 5rem;
+            color: #d4af37;
+            margin-bottom: 12px;
+        }
+
+        /* ===== testimonials ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 24px 22px;
+            border-radius: 20px;
+            border-left: 6px solid #d4af37;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card .author {
+            font-weight: 600;
+            color: #0b1a2e;
+        }
+
+        .testimonial-card .role {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* ===== contacts / form ===== */
+        .contacts-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: white;
+            padding: 40px 35px;
+            border-radius: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            border: 1px solid #e9edf2;
+        }
+
+        .contacts-info {
+            flex: 1 1 250px;
+        }
+
+        .contacts-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+
+        .contact-item i {
+            width: 28px;
+            color: #d4af37;
+            font-size: 1.3rem;
+        }
+
+        .contact-item a {
+            color: #0b1a2e;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: #d4af37;
+        }
+
+        .contacts-form {
+            flex: 2 1 300px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #d4d9e0;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group textarea {
+            border-radius: 24px;
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 140px;
+        }
+
+        /* ===== footer ===== */
+        .footer {
+            background: #0b1a2e;
+            color: #cbd5e1;
+            padding: 40px 0 24px;
+            margin-top: 20px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-col {
+            flex: 1 1 160px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #d4af37;
+        }
+
+        .footer-copy {
+            border-top: 1px solid #1e2f41;
+            padding-top: 24px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* адаптив */
+        @media (max-width: 700px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .nav {
+                justify-content: center;
+            }
+            .header-contacts {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .contacts-wrap {
+                padding: 25px 18px;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">
+            <i class="fas fa-car"></i>
+            Mercedes<span>Service</span>
+        </div>
+        <nav class="nav">
+            <a href="#services">Услуги</a>
+            <a href="#about">О нас</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <div class="header-contacts">
+            <a href="tel:XXXXX"><i class="fas fa-phone-alt"></i> XXXXX</a>
+            <a href="mailto:XXXXX"><i class="fas fa-envelope"></i> XXXXX</a>
+            <a href="#" class="btn btn-outline" style="padding: 6px 18px; font-size: 0.9rem;"><i class="fab fa-whatsapp"></i> Написать</a>
+        </div>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-content">
+            <h1>Профессиональный сервис <span>Mercedes</span></h1>
+            <p>Диагностика, ремонт и обслуживание автомобилей Mercedes-Benz. Гарантия качества и оригинальные запчасти.</p>
+            <a href="#contacts" class="btn"><i class="fas fa-calendar-check"></i> Записаться</a>
+            <div class="hero-badges">
+                <div><i class="fas fa-wrench"></i> 12+ лет опыта</div>
+                <div><i class="fas fa-award"></i> Оригинальные детали</div>
+                <div><i class="fas fa-tools"></i> Спецоборудование</div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-car-side"></i>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="section" id="services">
+    <div class="container">
+        <h2 class="section-title">Наши услуги</h2>
+        <p class="section-sub">Полный спектр работ для Mercedes-Benz: от диагностики до капитального ремонта</p>
+        <div class="services-grid">
+            <div class="service-card"><i class="fas fa-microchip"></i><h3>Диагностика</h3><p>Компьютерная и ручная диагностика всех систем.</p></div>
+            <div class="service-card"><i class="fas fa-cogs"></i><h3>Ремонт ДВС</h3><p>Капитальный и текущий ремонт двигателей.</p></div>
+            <div class="service-card"><i class="fas fa-exchange-alt"></i><h3>Коробка передач</h3><p>Ремонт АКПП, вариаторов, роботов.</p></div>
+            <div class="service-card"><i class="fas fa-suspension"></i><h3>Ходовая часть</h3><p>Замена рычагов, стоек, сайлентблоков.</p></div>
+            <div class="service-card"><i class="fas fa-bolt"></i><h3>Электрооборудование</h3><p>Электрика, датчики, блоки управления.</p></div>
+            <div class="service-card"><i class="fas fa-oil-can"></i><h3>Регламент ТО</h3><p>Замена масла, фильтров, технические жидкости.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section" id="about" style="background: #f1f5f9;">
+    <div class="container">
+        <h2 class="section-title">О сервисе</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p><strong>MercedesService.ru</strong> — специализированный автосервис для автомобилей Mercedes-Benz. Мы работаем с 2012 года и за это время отремонтировали более 2500 автомобилей.</p>
+                <p>Используем только оригинальные запчасти и качественные аналоги. Наши мастера проходят ежегодное обучение в Европе.</p>
+                <div class="about-stats">
+                    <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">лет на рынке</span></div>
+                    <div class="stat-item"><span class="stat-number">2 500+</span><span class="stat-label">авто отремонтировано</span></div>
+                    <div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">довольных клиентов</span></div>
+                </div>
+            </div>
+            <div class="about-image">
+                <i class="fas fa-garage"></i>
+                <h3 style="margin-top: 8px;">Собственный СТО</h3>
+                <p style="margin-top: 6px; color: #334155;">2 подъёмника, стенд развал-схождения, диагностическое оборудование</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="section" id="reviews">
+    <div class="container">
+        <h2 class="section-title">Отзывы клиентов</h2>
+        <p class="section-sub">Реальные отзывы наших клиентов о качестве работы</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card"><p>«Отличный сервис! Быстро нашли причину стука в подвеске, заменили рычаги за день. Спасибо мастерам.»</p><div class="author">Андрей К.</div><div class="role">Mercedes E-Class</div></div>
+            <div class="testimonial-card"><p>«Делал диагностику и замену масла в АКПП. Всё чётко, без навязывания. Цена адекватная.»</p><div class="author">Екатерина С.</div><div class="role">Mercedes GLC</div></div>
+            <div class="testimonial-card"><p>«Обращался с ошибкой по двигателю. Помимо ремонта дали рекомендации по эксплуатации. Рекомендую.»</p><div class="author">Игорь П.</div><div class="role">Mercedes Sprinter</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACTS ===== -->
+<section class="section" id="contacts" style="background: #f1f5f9;">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+        <p class="section-sub">Свяжитесь с нами или оставьте заявку — мы перезвоним</p>
+        <div class="contacts-wrap">
+            <div class="contacts-info">
+                <h3><i class="fas fa-map-pin" style="color:#d4af37;"></i> Наши контакты</h3>
+                <div class="contact-item"><i class="fas fa-phone-alt"></i> <a href="tel:XXXXX">XXXXX</a></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:XXXXX">XXXXX</a></div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> <span>XXXXX</span></div>
+                <div class="contact-item"><i class="fab fa-whatsapp"></i> <a href="#">XXXXX</a></div>
+                <div class="contact-item"><i class="fab fa-telegram"></i> <a href="#">XXXXX</a></div>
+                <div style="margin-top: 20px; font-size: 0.9rem; color: #475569;"><i class="fas fa-clock"></i> Пн–Пт: 9:00 – 20:00, Сб: 10:00 – 16:00</div>
+            </div>
+            <div class="contacts-form">
+                <form id="callbackForm">
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" placeholder="Ваше имя" required></div>
+                        <div class="form-group"><input type="tel" placeholder="Телефон" required></div>
+                    </div>
+                    <div class="form-group"><input type="text" placeholder="Модель авто" value="Mercedes"></div>
+                    <div class="form-group"><textarea placeholder="Опишите проблему или вопрос..."></textarea></div>
+                    <button type="submit" class="btn" style="width:100%;"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
+                    <p style="font-size:0.8rem; margin-top: 12px; color:#64748b;">Нажимая на кнопку, вы соглашаетесь с обработкой данных</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4><i class="fas fa-car" style="color:#d4af37;"></i> MercedesService</h4>
+                <p style="margin-top: 6px;">Специализированный сервис Mercedes-Benz в Москве.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Услуги</h4>
+                <a href="#">Диагностика</a>
+                <a href="#">Ремонт двигателя</a>
+                <a href="#">Ходовая часть</a>
+                <a href="#">Электрика</a>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <a href="tel:XXXXX"><i class="fas fa-phone-alt"></i> XXXXX</a>
+                <a href="mailto:XXXXX"><i class="fas fa-envelope"></i> XXXXX</a>
+                <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="footer-col">
+                <h4>Адрес</h4>
+                <span>XXXXX</span>
+                <div style="margin-top: 10px;"><i class="fas fa-clock"></i> Пн–Пт 9:00–20:00</div>
+            </div>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 MercedesService.ru — Все права защищены. Контакты: XXXXX
+        </div>
+    </div>
+</footer>
+
+<!-- небольшой js для формы (заглушка) -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('callbackForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+                form.reset();
+            });
+        }
+    });
+</script>
+</body>
+</html>
